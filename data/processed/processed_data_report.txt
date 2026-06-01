@@ -1,0 +1,62 @@
+Processed Data Report
+=====================
+
+Raw dataset path:
+/Users/yunwaddyoo/Desktop/url checker/data/raw/malicious_urls.csv
+
+Processed dataset path:
+/Users/yunwaddyoo/Desktop/url checker/data/processed/processed_urls.csv
+
+Original shape:
+(651191, 2)
+
+Final processed shape:
+(637179, 4)
+
+
+Cleaning Summary
+----------------
+Rows before null removal: 651191
+Rows after null removal: 651191
+Rows removed because of null url/type: 0
+
+Rows before empty URL removal: 651191
+Rows after empty URL removal: 651191
+Rows removed because of empty URL: 0
+
+Rows before duplicate removal: 651191
+Rows after duplicate removal: 637179
+Rows removed because of duplicate URL: 14012
+
+
+Original Type Counts
+--------------------
+original_type
+benign        424140
+defacement     95308
+phishing       94086
+malware        23645
+
+
+Binary Label Counts
+-------------------
+0 = benign
+1 = malicious
+
+binary_label
+0    424140
+1    213039
+
+
+Multiclass Label Counts
+-----------------------
+0 = benign
+1 = phishing
+2 = malware
+3 = defacement
+
+multiclass_label
+0    424140
+3     95308
+1     94086
+2     23645

@@ -24,7 +24,7 @@ def predict_url(url: str) -> dict:
     feature_columns = package["feature_columns"]
 
     features = extract_features(url)
-    X = pd.DataFrame([features])[feature_columns]
+    X = pd.DataFrame([features]).reindex(columns=feature_columns, fill_value=0)
 
     malicious_probability = model.predict_proba(X)[0][1]
     ml_score = round(malicious_probability * 100)

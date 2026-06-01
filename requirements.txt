@@ -6,3 +6,5 @@ joblib==1.5.3
 tldextract==5.3.0
 pytest==8.4.2
 validators==0.35.0
+urllib3==1.26.20
+xgboost==2.1.4

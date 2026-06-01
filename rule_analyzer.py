@@ -66,3 +66,18 @@ def analyze_with_rules(url: str) -> tuple[int, list[str]]:
         reasons.append("Path points to a downloadable executable or archive")
 
     return min(score, 100), reasons
+
+
+'''
+FTP stands for File Transfer Protocol.
+It is used to transfer files between computers.
+A phishing or malware link may use FTP to host downloads.
+
+SMTP stands for Simple Mail Transfer Protocol.
+It is used for sending email between mail servers.
+You usually do not browse normal websites using SMTP.
+
+LDAP stands for Lightweight Directory Access Protocol.
+It is used to access directory services, like user accounts, groups, and organization information.
+'''
+

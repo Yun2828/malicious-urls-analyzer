@@ -63,7 +63,7 @@ def parse_url(url: str) -> dict:
         "fragment": parsed.fragment or "",
     }
 
-    return {key: value for key, value in components.items() if value}
+    return components
 
 
 def extract_features(url: str) -> dict:

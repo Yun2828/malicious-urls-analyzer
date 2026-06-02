@@ -11,7 +11,7 @@ Original shape:
 (651191, 2)
 
 Final processed shape:
-(637179, 4)
+(637166, 4)
 
 
 Cleaning Summary
@@ -28,13 +28,17 @@ Rows before duplicate removal: 651191
 Rows after duplicate removal: 637179
 Rows removed because of duplicate URL: 14012
 
+Rows before invalid urls removal: 637179
+Rows after invalid urls removal: 637166
+Rows removed because of invalid urls: 13
+
 
 Original Type Counts
 --------------------
 original_type
 benign        424140
 defacement     95308
-phishing       94086
+phishing       94073
 malware        23645
 
 
@@ -45,7 +49,7 @@ Binary Label Counts
 
 binary_label
 0    424140
-1    213039
+1    213026
 
 
 Multiclass Label Counts
@@ -58,5 +62,5 @@ Multiclass Label Counts
 multiclass_label
 0    424140
 3     95308
-1     94086
+1     94073
 2     23645

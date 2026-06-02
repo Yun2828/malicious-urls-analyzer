@@ -1,6 +1,9 @@
 import joblib
+from pathlib import Path
 
-MODEL_PATH = "models/random_forest.pkl"
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+MODEL_PATH = BASE_DIR / "models" / "weighted_ensemble.pkl"
 
 package = joblib.load(MODEL_PATH)
 

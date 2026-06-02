@@ -1,0 +1,32 @@
+Logistic Regression Results
+===========================
+
+Best Parameters
+---------------
+{'model__C': 0.1, 'model__penalty': 'l1'}
+
+Best Cross-Validation F1
+------------------------
+0.6419757800924297
+
+Test Metrics
+------------
+Accuracy: 0.759
+Precision malicious: 0.6295473479589003
+Recall malicious: 0.6781334131020041
+F1 malicious: 0.6529377880184332
+
+Confusion Matrix
+----------------
+[[5323, 1334], [1076, 2267]]
+
+Classification Report
+---------------------
+              precision    recall  f1-score   support
+
+      benign       0.83      0.80      0.82      6657
+   malicious       0.63      0.68      0.65      3343
+
+    accuracy                           0.76     10000
+   macro avg       0.73      0.74      0.73     10000
+weighted avg       0.76      0.76      0.76     10000

@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+from urllib.parse import urlparse
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 
@@ -21,6 +22,13 @@ MULTICLASS_LABEL_MAPPING = {
     "defacement": 3,
 }
 
+def is_parseable_url(url: str) -> bool:
+    try:
+        urlparse(url)
+        return True
+    except ValueError:
+        return False
+    
 def normalize_url(url: str) -> str:
     url = str(url).strip()
 
@@ -54,6 +62,8 @@ def write_report(
     after_empty_url,
     before_duplicates,
     after_duplicates,
+    before_invalid_urls,
+    after_invalid_urls,
     original_type_counts,
     binary_label_counts,
     multiclass_label_counts,
@@ -88,6 +98,10 @@ Rows removed because of empty URL: {before_empty_url - after_empty_url}
 Rows before duplicate removal: {before_duplicates}
 Rows after duplicate removal: {after_duplicates}
 Rows removed because of duplicate URL: {before_duplicates - after_duplicates}
+
+Rows before invalid urls removal: {before_invalid_urls}
+Rows after invalid urls removal: {after_invalid_urls}
+Rows removed because of invalid urls: {before_invalid_urls - after_invalid_urls}
 
 
 Original Type Counts
@@ -152,6 +166,10 @@ def main():
     allowed_labels = set(BINARY_LABEL_MAPPING.keys())
     found_labels = set(df["original_type"].unique())
     unknown_labels = found_labels - allowed_labels
+    
+    before_invalid_urls = len(df)
+    df = df[df["url"].apply(is_parseable_url)]
+    after_invalid_urls = len(df)
 
     if unknown_labels:
         raise ValueError(f"Unknown labels found in dataset: {unknown_labels}")
@@ -180,6 +198,8 @@ def main():
         after_empty_url=after_empty_url,
         before_duplicates=before_duplicates,
         after_duplicates=after_duplicates,
+        before_invalid_urls=before_invalid_urls,
+        after_invalid_urls=after_invalid_urls,
         original_type_counts=processed_df["original_type"].value_counts(),
         binary_label_counts=processed_df["binary_label"].value_counts(),
         multiclass_label_counts=processed_df["multiclass_label"].value_counts(),

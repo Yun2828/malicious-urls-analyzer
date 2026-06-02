@@ -35,7 +35,19 @@ from urllib.parse import urlparse, parse_qs
 
 
 def parse_url(url: str) -> dict:
-    parsed = urlparse(url)
+    try:
+        parsed = urlparse(url)
+    except ValueError:
+        return {
+            "protocol": "",
+            "subdomain": "",
+            "hostname": "",
+            "domain_name": "",
+            "path": "",
+            "query": "",
+            "query_params": {},
+            "fragment": "",
+        }
     hostname = parsed.hostname or ""
     path = parsed.path or ""
     query = parsed.query or ""

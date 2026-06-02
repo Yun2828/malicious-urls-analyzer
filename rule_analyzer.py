@@ -1,5 +1,24 @@
 from feature_extractor import parse_url, RISKY_TLDS, SUSPICIOUS_KEYWORDS, BRAND_WORDS
 
+OFFICIAL_BRAND_DOMAINS = {
+    "google": ["google.com"],
+    "microsoft": ["microsoft.com", "office.com", "live.com", "outlook.com"],
+    "apple": ["apple.com"],
+    "paypal": ["paypal.com"],
+    "amazon": ["amazon.com"],
+    "facebook": ["facebook.com"],
+    "office": ["office.com", "microsoft.com"],
+}
+
+TRUSTED_DOMAINS = {
+    "google.com",
+    "microsoft.com",
+    "apple.com",
+    "amazon.com",
+    "paypal.com",
+    "github.com",
+    "python.org",
+}
 
 def analyze_with_rules(url: str) -> tuple[int, list[str]]:
     """Return a rule-based risk score from 0 to 100 and human-readable reasons."""
@@ -11,6 +30,10 @@ def analyze_with_rules(url: str) -> tuple[int, list[str]]:
     lower_url = url.lower()
     score = 0
     reasons = []
+    domain_name = parts.get("domain_name", "")
+
+    if domain_name in TRUSTED_DOMAINS:
+        return 0, ["Domain is trusted"]
 
     if protocol not in ["http", "https"]:
         score += 20
@@ -41,9 +64,17 @@ def analyze_with_rules(url: str) -> tuple[int, list[str]]:
         reasons.append("Contains suspicious words: " + ", ".join(keyword_hits))
 
     brand_hits = [word for word in BRAND_WORDS if word in lower_url]
-    if brand_hits and not any(hostname.endswith(f"{brand}.com") for brand in brand_hits):
-        score += 15
-        reasons.append("Mentions a known brand but is not clearly on that brand's official domain")
+    domain_name = parts.get("domain_name", "")
+
+    for brand in brand_hits:
+        official_domains = OFFICIAL_BRAND_DOMAINS.get(brand, [])
+
+        if official_domains and domain_name not in official_domains:
+            score += 15
+            reasons.append(
+                "Mentions a known brand but is not clearly on that brand's official domain"
+            )
+            break
 
     if path.count("/") >= 3 and any(word in lower_url for word in ["login", "account", "verify"]):
         score += 15

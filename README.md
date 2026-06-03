@@ -1,20 +1,6 @@
-# URL Safety Checker
+# URL Safety Analyzer
 
-A beginner-friendly cybersecurity and machine learning prototype that checks whether a URL looks safe, suspicious, or potentially malicious.
-
-The system combines:
-
-- URL input validation
-- URL component parsing
-- Feature extraction
-- Rule-based security checks
-- Reputation signals using Tranco top domains
-- Brand impersonation checks
-- Typo-similarity checks for lookalike domains
-- Machine learning using Logistic Regression and Random Forest
-- Weighted ensemble scoring
-- Streamlit web interface
-- Risk score with rule-based and ML explanations
+A cybersecurity and machine learning prototype that checks whether a URL looks safe, suspicious, or potentially malicious.
 
 ## How to Run
 

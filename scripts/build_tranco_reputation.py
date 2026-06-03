@@ -4,7 +4,7 @@ import pandas as pd
 from tranco import Tranco
 
 
-BASE_DIR = Path(__file__).resolve().parents[0]
+BASE_DIR = Path(__file__).resolve().parents[1]
 
 CACHE_DIR = BASE_DIR / ".tranco"
 OUTPUT_PATH = BASE_DIR / "data" / "reputation" / "tranco_top_domains.csv"

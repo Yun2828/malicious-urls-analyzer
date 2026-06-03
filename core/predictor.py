@@ -15,6 +15,8 @@ MODEL_PATH = BASE_DIR / "models" / "weighted_ensemble.pkl"
 def load_model_package() -> dict:
     return joblib.load(MODEL_PATH)
 
+def load_model() -> dict:
+    return load_model_package()
 
 def classify_score(score: int) -> str:
     if score <= 30:
@@ -85,7 +87,7 @@ def predict_url(url: str) -> dict:
             "classification_type": "binary",
         }
 
-    package = load_model_package()
+    package = load_model()
 
     models = package["models"]
     model_weights = package["model_weights"]

@@ -58,5 +58,3 @@ def get_domain_reputation(domain_name: str) -> dict:
         "tranco_rank": data["tranco_rank"],
         "domain_reputation_score": data["reputation_score"],
     }
-    
-print(get_domain_reputation("google.com"))

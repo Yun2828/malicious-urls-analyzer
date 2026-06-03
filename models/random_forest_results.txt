@@ -7,26 +7,26 @@ Best Parameters
 
 Best Cross-Validation F1
 ------------------------
-0.8443965874876967
+0.882474619557926
 
 Test Metrics
 ------------
-Accuracy: 0.9018
-Precision malicious: 0.8681010289990645
-Recall malicious: 0.8327849237212085
-F1 malicious: 0.8500763358778626
+Accuracy: 0.9279
+Precision malicious: 0.9046296296296297
+Recall malicious: 0.8767574035297637
+F1 malicious: 0.8904754671122589
 
 Confusion Matrix
 ----------------
-[[6234, 423], [559, 2784]]
+[[6348, 309], [412, 2931]]
 
 Classification Report
 ---------------------
               precision    recall  f1-score   support
 
-      benign       0.92      0.94      0.93      6657
-   malicious       0.87      0.83      0.85      3343
+      benign       0.94      0.95      0.95      6657
+   malicious       0.90      0.88      0.89      3343
 
-    accuracy                           0.90     10000
-   macro avg       0.89      0.88      0.89     10000
-weighted avg       0.90      0.90      0.90     10000
+    accuracy                           0.93     10000
+   macro avg       0.92      0.92      0.92     10000
+weighted avg       0.93      0.93      0.93     10000

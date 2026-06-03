@@ -1,6 +1,9 @@
 from core.rule_analyzer import analyze_with_rules
 
 
+SAFE_UNKNOWN_DOMAIN = "unknown-test-domain-12345.com"
+
+
 def test_rules_low_score_for_clean_https_url():
     score, reasons = analyze_with_rules("https://www.google.com")
 
@@ -10,14 +13,16 @@ def test_rules_low_score_for_clean_https_url():
 
 
 def test_rules_flags_http():
-    score, reasons = analyze_with_rules("http://www.example.com")
+    score, reasons = analyze_with_rules(f"http://{SAFE_UNKNOWN_DOMAIN}")
 
     assert score >= 15
     assert any("https" in reason.lower() for reason in reasons)
 
 
 def test_rules_flags_unusual_protocol():
-    score, reasons = analyze_with_rules("ftp://example.com/download/file.zip")
+    score, reasons = analyze_with_rules(
+        f"ftp://{SAFE_UNKNOWN_DOMAIN}/download/file.zip"
+    )
 
     assert score >= 20
     assert any("protocol" in reason.lower() for reason in reasons)
@@ -31,7 +36,7 @@ def test_rules_flags_ip_hostname():
 
 
 def test_rules_flags_risky_tld():
-    score, reasons = analyze_with_rules("http://example.xyz/login")
+    score, reasons = analyze_with_rules("http://unknown-test-domain-12345.xyz/login")
 
     assert score >= 10
     assert any("risky" in reason.lower() or "tld" in reason.lower() for reason in reasons)
@@ -39,7 +44,7 @@ def test_rules_flags_risky_tld():
 
 def test_rules_flags_suspicious_keywords():
     score, reasons = analyze_with_rules(
-        "http://example.com/login/verify/account"
+        f"http://{SAFE_UNKNOWN_DOMAIN}/login/verify/account"
     )
 
     assert score > 0
@@ -48,7 +53,7 @@ def test_rules_flags_suspicious_keywords():
 
 def test_rules_flags_brand_impersonation():
     score, reasons = analyze_with_rules(
-        "http://microsoft-login-security.example.com/verify"
+        "http://microsoft-login-security.unknown-test-domain-12345.com/verify"
     )
 
     assert score > 0
@@ -58,12 +63,12 @@ def test_rules_flags_brand_impersonation():
 def test_rules_does_not_flag_official_brand_domain_as_impersonation():
     score, reasons = analyze_with_rules("https://microsoft.com/account")
 
-    assert not any("brand" in reason.lower() for reason in reasons)
+    assert not any("not on an official brand domain" in reason.lower() for reason in reasons)
 
 
 def test_rules_flags_deep_login_path():
     score, reasons = analyze_with_rules(
-        "http://example.com/about/reports/december/login/account"
+        f"http://{SAFE_UNKNOWN_DOMAIN}/about/reports/december/login/account"
     )
 
     assert score > 0
@@ -72,7 +77,7 @@ def test_rules_flags_deep_login_path():
 
 def test_rules_flags_query_parameters():
     score, reasons = analyze_with_rules(
-        "https://example.com/search?q=test"
+        f"https://{SAFE_UNKNOWN_DOMAIN}/search?q=test"
     )
 
     assert score >= 5
@@ -81,7 +86,7 @@ def test_rules_flags_query_parameters():
 
 def test_rules_flags_token_or_session_data():
     score, reasons = analyze_with_rules(
-        "https://example.com/login?user=abc&session=123"
+        f"https://{SAFE_UNKNOWN_DOMAIN}/login?user=abc&session=123"
     )
 
     assert score >= 10
@@ -90,7 +95,7 @@ def test_rules_flags_token_or_session_data():
 
 def test_rules_flags_url_encoded_characters():
     score, reasons = analyze_with_rules(
-        "https://example.com/search?q=hello%20world"
+        f"https://{SAFE_UNKNOWN_DOMAIN}/search?q=hello%20world"
     )
 
     assert score >= 5
@@ -99,11 +104,18 @@ def test_rules_flags_url_encoded_characters():
 
 def test_rules_flags_downloadable_file():
     score, reasons = analyze_with_rules(
-        "http://example.com/download/update.exe"
+        f"http://{SAFE_UNKNOWN_DOMAIN}/download/update.exe"
     )
 
     assert score >= 20
     assert any("downloadable" in reason.lower() or "executable" in reason.lower() for reason in reasons)
+
+
+def test_rules_flags_typo_similarity():
+    score, reasons = analyze_with_rules("https://g00gle.com")
+
+    assert score > 0
+    assert any("similar to the known brand" in reason.lower() for reason in reasons)
 
 
 def test_rules_score_never_exceeds_100():

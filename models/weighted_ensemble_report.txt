@@ -16,6 +16,6 @@ Recall for malicious class
 
 Model Comparison
 ----------------
-              model  accuracy  precision_malicious  recall_malicious  f1_malicious  ensemble_weight                                                      best_params  best_cv_score             confusion_matrix
-      random_forest    0.9018             0.868101          0.832785      0.850076         0.565581 {'max_depth': None, 'min_samples_split': 5, 'n_estimators': 200}       0.844397   [[6234, 423], [559, 2784]]
-logistic_regression    0.7590             0.629547          0.678133      0.652938         0.434419                        {'model__C': 0.1, 'model__penalty': 'l1'}       0.641976 [[5323, 1334], [1076, 2267]]
+              model  accuracy  precision_malicious  recall_malicious  f1_malicious  ensemble_weight                                                      best_params  best_cv_score           confusion_matrix
+      random_forest    0.9279             0.904630          0.876757      0.890475         0.539701 {'max_depth': None, 'min_samples_split': 5, 'n_estimators': 200}       0.882475 [[6348, 309], [412, 2931]]
+logistic_regression    0.8355             0.742849          0.776847      0.759468         0.460299                       {'model__C': 10.0, 'model__penalty': 'l2'}       0.753580 [[5758, 899], [746, 2597]]

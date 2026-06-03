@@ -10,78 +10,42 @@ A cybersecurity and machine learning prototype that checks whether a URL looks s
 pip install -r requirements.txt
 ```
 
-The current version uses Logistic Regression and Random Forest, so XGBoost is optional.
-
-### 2. Build Tranco reputation data
+### 2. Run the full pipeline
 
 ```bash
-python3 scripts/build_tranco_reputation.py
+./run_pipeline.sh
 ```
 
-This creates:
+This runs:
+
+```text
+1. Build Tranco reputation data
+2. Prepare the dataset
+3. Train Logistic Regression
+4. Train Random Forest
+5. Build the weighted ensemble
+6. Run tests
+```
+
+The pipeline creates:
 
 ```text
 data/reputation/tranco_top_domains.csv
-```
-
-### 3. Prepare the dataset
-
-```bash
-python3 scripts/prepare_dataset.py
-```
-
-This creates:
-
-```text
 data/processed/processed_urls.csv
 data/processed/processed_data_report.txt
-```
-
-### 4. Train Logistic Regression
-
-```bash
-python3 training/train_logistic_regression.py
-```
-
-This creates a local model file:
-
-```text
 models/logistic_regression.pkl
-```
-
-### 5. Train Random Forest
-
-```bash
-python3 training/train_random_forest.py
-```
-
-This creates a local model file:
-
-```text
 models/random_forest.pkl
-```
-
-### 6. Build weighted ensemble
-
-```bash
-python3 training/build_weighted_ensemble.py
-```
-
-This creates:
-
-```text
 models/weighted_ensemble.pkl
 models/weighted_ensemble_report.txt
 models/weighted_ensemble_results.json
 ```
 
-### 7. Run tests
+### 3. Start the Streamlit app
 
 ```bash
-pytest tests/ -v
+streamlit run app.py
 ```
 
-### 8. Start the Streamlit app
 
 ```bash
 streamlit run app.py

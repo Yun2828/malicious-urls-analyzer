@@ -1,4 +1,4 @@
-from rule_analyzer import analyze_with_rules
+from core.rule_analyzer import analyze_with_rules
 
 
 def test_rules_low_score_for_clean_https_url():

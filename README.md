@@ -31,6 +31,7 @@ url_safety_checker_v1/
 ### 1. Install dependencies
 
 ```bash
+brew install libomp
 pip install -r requirements.txt
 ```
 

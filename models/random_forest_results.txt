@@ -1,0 +1,32 @@
+Random Forest Results
+=====================
+
+Best Parameters
+---------------
+{'max_depth': None, 'min_samples_split': 5, 'n_estimators': 200}
+
+Best Cross-Validation F1
+------------------------
+0.8443965874876967
+
+Test Metrics
+------------
+Accuracy: 0.9018
+Precision malicious: 0.8681010289990645
+Recall malicious: 0.8327849237212085
+F1 malicious: 0.8500763358778626
+
+Confusion Matrix
+----------------
+[[6234, 423], [559, 2784]]
+
+Classification Report
+---------------------
+              precision    recall  f1-score   support
+
+      benign       0.92      0.94      0.93      6657
+   malicious       0.87      0.83      0.85      3343
+
+    accuracy                           0.90     10000
+   macro avg       0.89      0.88      0.89     10000
+weighted avg       0.90      0.90      0.90     10000

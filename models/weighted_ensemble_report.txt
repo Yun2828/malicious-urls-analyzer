@@ -1,0 +1,21 @@
+Weighted Ensemble Report
+========================
+
+Weighting Formula
+-----------------
+weight = model_f1 / sum(all_f1_scores)
+
+Primary Score
+-------------
+F1 score for malicious class
+
+Secondary Safety Metric
+-----------------------
+Recall for malicious class
+
+
+Model Comparison
+----------------
+              model  accuracy  precision_malicious  recall_malicious  f1_malicious  ensemble_weight                                                      best_params  best_cv_score             confusion_matrix
+      random_forest    0.9018             0.868101          0.832785      0.850076         0.565581 {'max_depth': None, 'min_samples_split': 5, 'n_estimators': 200}       0.844397   [[6234, 423], [559, 2784]]
+logistic_regression    0.7590             0.629547          0.678133      0.652938         0.434419                        {'model__C': 0.1, 'model__penalty': 'l1'}       0.641976 [[5323, 1334], [1076, 2267]]

@@ -1,4 +1,4 @@
-from feature_extractor import (
+from core.feature_extractor import (
     parse_url,
     extract_features,
     has_ip_address,

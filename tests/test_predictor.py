@@ -1,4 +1,4 @@
-import predictor
+import core.predictor as predictor
 
 
 class FakeModel:

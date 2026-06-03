@@ -1,12 +1,12 @@
 import streamlit as st
 import validators
 
-from predictor import predict_url
+from core.predictor import predict_url
 
 
-st.set_page_config(page_title="URL Safety Checker")
+st.set_page_config(page_title="URL Safety Analyzer")
 
-st.title("URL Safety Checker")
+st.title("URL Safety Analyzer")
 st.write(
     "This prototype checks whether a URL looks safe, suspicious, or malicious "
     "using rule-based analysis and a weighted machine learning ensemble."
@@ -44,10 +44,19 @@ if st.button("Check URL"):
         st.write("Rule Score:", result["rule_score"])
         st.write("ML Ensemble Score:", result["ml_score"])
 
-        st.subheader("Rule-Based Reasons")
+        st.subheader("Rule-Based Explanation")
 
         if result["reasons"]:
             for reason in result["reasons"]:
                 st.write("-", reason)
         else:
             st.write("No major rule-based warning signs found.")
+            
+        st.subheader("Machine Learning Explanation")
+
+        ml_reasons = result.get("ml_reasons", [])
+        if ml_reasons:
+            for reason in ml_reasons:
+                st.write("-", reason)
+        else:
+            st.write("Machine learning did not return an explanation for this scan.")

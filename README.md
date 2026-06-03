@@ -24,12 +24,6 @@ The system combines:
 pip install -r requirements.txt
 ```
 
-On macOS, if XGBoost is used later and fails because of `libomp.dylib`, install OpenMP:
-
-```bash
-brew install libomp
-```
-
 The current version uses Logistic Regression and Random Forest, so XGBoost is optional.
 
 ### 2. Build Tranco reputation data

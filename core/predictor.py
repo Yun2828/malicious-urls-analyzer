@@ -71,10 +71,10 @@ def predict_url(url: str) -> dict:
 
     if reputation["is_tranco_domain"] and rule_score == 0:
         return {
-            "final_score": 5,
-            "category": classify_score(5),
+            "final_score": 0,
+            "category": classify_score(0),
             "rule_score": 0,
-            "ml_score": 5,
+            "ml_score": 0,
             "reasons": [
                 f"Domain appears in Tranco top domains with rank {reputation['tranco_rank']}",
             ],

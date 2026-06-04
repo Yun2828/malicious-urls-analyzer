@@ -107,7 +107,6 @@ def analyze_with_rules(url: str) -> tuple[int, list[str]]:
             "Contains query parameters. Query strings can pass tracking data, redirects, or user-specific values."
         )
 
-    # Pull query token explanations from dictionary
     query_token_hits = [
         token for token in QUERY_TOKEN_EXPLANATIONS
         if token in lower_url
@@ -119,19 +118,16 @@ def analyze_with_rules(url: str) -> tuple[int, list[str]]:
         for token in query_token_hits:
             reasons.append(QUERY_TOKEN_EXPLANATIONS[token])
 
-    # Pull encoding explanations from dictionary
     encoding_hits = [
         encoded_value for encoded_value in ENCODING_EXPLANATIONS
         if encoded_value in lower_url
     ]
-
     if encoding_hits:
         score += 5
 
         for encoded_value in encoding_hits:
             reasons.append(ENCODING_EXPLANATIONS[encoded_value])
 
-    # Pull file extension explanations from dictionary
     extension_hits = [
         ext for ext in FILE_EXTENSION_EXPLANATIONS
         if lower_path.endswith(ext)

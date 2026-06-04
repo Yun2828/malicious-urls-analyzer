@@ -21,7 +21,7 @@ def load_model() -> dict:
 def classify_score(score: int) -> str:
     if score <= 30:
         return "Low Risk / Likely Safe"
-    if score <= 69:
+    if score <= 70:
         return "Medium Risk / Suspicious"
     return "High Risk / Likely Malicious"
 
